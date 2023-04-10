@@ -1,0 +1,11 @@
+fragment Product on ProductModel {
+  id
+  name
+  slug
+  description
+  images
+  price
+  colors
+  sizes
+  createdAt
+}

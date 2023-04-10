@@ -1,0 +1,110 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "futura";
+  src: url("../assets/fonts/futura-medium.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "futuraBold";
+  src: url("../assets/fonts/futura-bold.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+}
+
+@layer base {
+  video {
+    object-fit: cover;
+  }
+
+  img {
+    position: static !important;
+    max-width: none;
+  }
+}
+
+.slick-prev,
+.slick-next {
+  @apply !z-10 !w-3 !h-5 !-top-11 md:!-top-12 !translate-y-0;
+}
+
+.slick-prev {
+  @apply !left-auto !right-[145px] md:!right-44 lg:!right-48;
+}
+
+.slick-next {
+  @apply !right-[100px] md:!right-32 lg:!right-36;
+}
+
+.product .slick-prev {
+  @apply !left-auto !right-[73px] md:!right-24;
+}
+
+.product .slick-next {
+  @apply !right-7 md:!right-12;
+}
+
+.slick-prev:before,
+.slick-next:before {
+  @apply !content-[""] !w-3 !h-5 block bg-no-repeat bg-contain;
+}
+
+.slick-prev:before {
+  @apply !bg-[url("/images/icons/prev.png")];
+}
+
+.slick-next:before {
+  @apply !bg-[url("/images/icons/next.png")];
+}
+
+#nprogress .bar {
+  @apply !bg-[#f87171] !h-[4px];
+}
+
+#nprogress .peg {
+  @apply !shadow-[0_0_10px_rgba(248,113,113,1),0_0_5px_rgba(248,113,113,1)];
+}
+
+.bm-overlay {
+  @apply top-0 !bg-black/70 cursor-pointer;
+}
+
+.bm-menu {
+  @apply px-9 py-20;
+}
+
+.bm-burger-button {
+  @apply md:hidden absolute w-7 h-5 left-5 top-[20px];
+}
+
+.bm-menu-wrap {
+  @apply top-0;
+}
+
+.bm-burger-bars {
+  @apply bg-black;
+}
+
+.bm-burger-bars {
+  @apply !h-[1px];
+}
+
+.bm-cross-button {
+  @apply !w-6 !h-6 !top-3 !right-5;
+}
+
+#react-burger-cross-btn {
+  @apply !top-[6px] !-left-[1px];
+}
+
+.bm-cross {
+  @apply bg-black !w-[1px] !h-[25px];
+}
+
+.bm-menu {
+  @apply bg-white;
+}

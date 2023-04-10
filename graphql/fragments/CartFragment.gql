@@ -1,0 +1,12 @@
+fragment Cart on CartItemModel {
+  id
+  quantity
+  totalAmount
+  size
+  color
+  productId
+  userId
+  orderId
+  status
+  createdAt
+}

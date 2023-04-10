@@ -1,0 +1,11 @@
+mutation AddCart($cartInput: CartInput!) {
+  addCart(cartInput: $cartInput) {
+    ...Cart
+    user {
+      ...User
+      cartItems {
+        ...Cart
+      }
+    }
+  }
+}

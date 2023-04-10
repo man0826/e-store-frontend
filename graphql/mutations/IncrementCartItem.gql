@@ -1,0 +1,11 @@
+mutation IncrementCartItem($cartId: String!) {
+  incrementCartItem(cartId: $cartId) {
+    ...Cart
+    user {
+      ...User
+      cartItems {
+        ...Cart
+      }
+    }
+  }
+}

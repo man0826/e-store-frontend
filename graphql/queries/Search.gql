@@ -1,0 +1,5 @@
+query Search($name: String!) {
+  search(name: $name) {
+    ...Product
+  }
+}

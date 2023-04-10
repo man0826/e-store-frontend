@@ -1,0 +1,5 @@
+fragment Category on CategoryModel {
+  id
+  name
+  slug
+}

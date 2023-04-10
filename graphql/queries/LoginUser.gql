@@ -1,0 +1,8 @@
+query LoginUser {
+  loginUser {
+    ...User
+    cartItems {
+      ...Cart
+    }
+  }
+}

@@ -1,0 +1,6 @@
+fragment Order on OrderModel {
+  id
+  totalAmount
+  userId
+  createdAt
+}

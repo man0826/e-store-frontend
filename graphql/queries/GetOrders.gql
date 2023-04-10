@@ -1,0 +1,11 @@
+query GetOrders($userId: String!) {
+  getOrders(userId: $userId) {
+    ...Order
+    cart {
+      ...Cart
+      product {
+        ...Product
+      }
+    }
+  }
+}

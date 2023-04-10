@@ -1,0 +1,5 @@
+query GetOrderStatusFromStripe($id: String!) {
+  getOrderStatusFromStripe(id: $id) {
+    status
+  }
+}

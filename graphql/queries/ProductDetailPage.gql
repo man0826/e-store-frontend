@@ -1,0 +1,8 @@
+query ProductDetailPage($productSlug: String!) {
+  findProductBySlug(productSlug: $productSlug) {
+    ...Product
+    categories {
+      ...Category
+    }
+  }
+}

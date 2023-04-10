@@ -1,0 +1,11 @@
+mutation Login($authInput: AuthInput!) {
+  authenticate(authInput: $authInput) {
+    access_token
+    user {
+      ...User
+      cartItems {
+        ...Cart
+      }
+    }
+  }
+}

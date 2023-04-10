@@ -1,0 +1,11 @@
+mutation DeleteCartItem($cartId: String!) {
+  deleteCartItem(cartId: $cartId) {
+    ...Cart
+    user {
+      ...User
+      cartItems {
+        ...Cart
+      }
+    }
+  }
+}

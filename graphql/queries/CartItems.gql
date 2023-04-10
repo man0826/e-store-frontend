@@ -1,0 +1,8 @@
+query CartItems {
+  cartItems {
+    ...Cart
+    product {
+      ...Product
+    }
+  }
+}
