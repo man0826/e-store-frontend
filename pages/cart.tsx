@@ -32,7 +32,7 @@ const Cart = () => {
   return (
     <section className="px-4 py-14 md:py-20">
       <div className="max-w-4xl mx-auto">
-        <h1 className="text-2xl md:text-4xl mb-4 font-futura">CART</h1>
+        <h1 className="text-2xl md:text-4xl mb-4 font-futura">CAR</h1>
         {cartProducts?.length || cartLoading ? (
           <>
             <div className="w-full border-b border-black">
