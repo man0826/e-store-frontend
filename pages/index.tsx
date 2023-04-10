@@ -9,7 +9,6 @@ import {
   GetProductsDocument,
 } from "@/graphql/generated.graphql";
 import Link from "next/link";
-import nookies from "nookies";
 import ProductSlider from "@/components/slider/ProductSlider";
 import Video from "@/components/home/Video";
 import CategoryItem from "@/components/home/CategoryItem";
@@ -46,7 +45,11 @@ const Home: NextPage<Props> = ({ products, categories }) => {
       <section>
         <div className="grid grid-cols-1 sm:grid-cols-2 sm:border-b border-black">
           {categories.slice(0, 2).map((category) => (
-            <CategoryItem key={category.id} category={category} />
+            <CategoryItem
+              key={category.id}
+              category={category}
+              isLarge={true}
+            />
           ))}
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-4 border-b border-black">
@@ -71,25 +74,11 @@ const Home: NextPage<Props> = ({ products, categories }) => {
   );
 };
 
-// export const getServerSideProps: GetServerSideProps<Props> = async (
 export const getServerSideProps: GetServerSideProps = async (
   ctx: GetServerSidePropsContext
 ) => {
   try {
-    const { token } = nookies.get(ctx);
     const apolloClient = initializeApollo(ctx);
-
-    // if (!token) {
-    //   return {
-    //     redirect: {
-    //       permanent: false,
-    //       destination: "/login",
-    //     },
-
-    //     props: {} as never,
-    //   };
-    // }
-
     const {
       data: { products },
     } = await apolloClient.query<GetProductsQuery>({

@@ -1,8 +1,8 @@
 import dynamic from "next/dynamic";
 import { useState } from "react";
 import Loading from "../ui/Loading";
-const ReactPlayer = dynamic(() => import("react-player"), { ssr: false });
 
+const ReactPlayer = dynamic(() => import("react-player"), { ssr: false });
 const Video = () => {
   const [isLoading, setIsLoading] = useState(true);
 

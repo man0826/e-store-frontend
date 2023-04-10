@@ -6,7 +6,6 @@
     "dev": "next dev -p ${PORT:-3332}",
     "build": "next build",
     "start": "next start -p ${PORT:-3332}",
-    "start:prod": "node dist/main",
     "lint": "next lint",
     "gen-types": "graphql-codegen --config codegen.yml"
   },

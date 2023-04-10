@@ -4,12 +4,9 @@ import {
   NormalizedCacheObject,
   createHttpLink,
 } from "@apollo/client";
-// import "cross-fetch/polyfill";
 import { setContext } from "@apollo/client/link/context";
 import nookies from "nookies";
 import { GetServerSidePropsContext } from "next";
-
-// export const APOLLO_STATE_PROP_NAME = "__APOLLO_STATE__";
 
 let apolloClient: ApolloClient<NormalizedCacheObject> | undefined;
 

@@ -15,7 +15,6 @@ import {
   GetStaticPropsContext,
 } from "next";
 import { useEffect, useState } from "react";
-import { useReactiveVar } from "@apollo/client";
 import { isLoggedInVar } from "@/utils/cache";
 import { useRouter } from "next/router";
 import { useAddCart } from "@/hooks/useCart";
@@ -29,6 +28,8 @@ import { useCategory } from "@/hooks/useCategory";
 import Button from "@/components/ui/Button";
 import Link from "next/link";
 import ProductSlider from "@/components/slider/ProductSlider";
+import { useLoginUser } from "@/hooks/useUser";
+import { destroyCookie } from "nookies";
 
 type Props = {
   product: ProductModel;
@@ -38,7 +39,6 @@ const Product: NextPage<Props> = ({ product }) => {
   const [selectedSize, setSelectedSize] = useState(0);
   const [selectedColor, setSelectedColor] = useState(0);
   const [quantity, setQuantity] = useState(1);
-  const isLoggedIn = useReactiveVar(isLoggedInVar);
   const router = useRouter();
   const addCart = useAddCart();
   const { id, name, price, colors, sizes, categories } = product;
@@ -46,6 +46,7 @@ const Product: NextPage<Props> = ({ product }) => {
   const [isLoading, setIsLoading] = useState(true);
   const { category } = useCategory(categorySlug!);
   const relatedItems = category?.products.filter((item) => item.id !== id);
+  const { loginUser } = useLoginUser();
 
   useEffect(() => {
     setTimeout(() => setIsLoading(false), 1000);
@@ -57,7 +58,7 @@ const Product: NextPage<Props> = ({ product }) => {
   }, [product]);
 
   const handleSubmit = async () => {
-    if (isLoggedIn) {
+    if (loginUser) {
       await addCart({
         productId: Number(id),
         quantity,
@@ -65,6 +66,8 @@ const Product: NextPage<Props> = ({ product }) => {
         color: colors && (colors[selectedColor] as ProductColor),
       });
     } else {
+      destroyCookie({}, "token");
+      isLoggedInVar(false);
       router.push("/login");
     }
   };
@@ -272,7 +275,6 @@ export const getStaticPaths: GetStaticPaths = async () => {
   };
 };
 
-// export const getStaticProps: GetStaticProps<Props> = async ({
 export const getStaticProps: GetStaticProps = async ({
   params,
 }: GetStaticPropsContext) => {

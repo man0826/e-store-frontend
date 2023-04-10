@@ -4,12 +4,15 @@ import ZoomAnimation from "../animation/ZoomAnimation";
 
 type Props = {
   category: CategoryModel;
+  isLarge?: boolean;
 };
 
-const CategoryItem = ({ category }: Props) => {
+const CategoryItem = ({ category, isLarge = false }: Props) => {
   return (
     <Link
-      className="border-t sm:border-t-0 sm:border-r border-black last:border-r-0 group relative h-[35vw] sm:h-full overflow-hidden"
+      className={`h-[35vw] ${
+        isLarge ? "sm:h-[45vw]" : "sm:h-[30vw]"
+      } border-t sm:border-t-0 sm:border-r border-black last:border-r-0 group relative overflow-hidden`}
       key={category.id}
       href={`/category/${category.slug}`}
     >

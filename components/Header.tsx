@@ -11,12 +11,13 @@ import Marquee from "react-fast-marquee";
 import { useCategories } from "@/hooks/useCategory";
 import SearchInput from "./search/SearchInput";
 import Nav from "./Nav";
+import { destroyCookie } from "nookies";
 
 const Header = () => {
   const isLoggedIn = useReactiveVar(isLoggedInVar);
   const cartTotal = useReactiveVar(cartTotalVar);
   const isOpenSearch = useReactiveVar(isOpenSearchVar);
-  const { loginUser } = useLoginUser();
+  const { loginUser, loginUserLoading, error } = useLoginUser();
   const { categories } = useCategories();
   const text = "10,000円以上のお買い上げで送料無料 ".repeat(5).split(" ");
   const display = () => {
@@ -31,10 +32,16 @@ const Header = () => {
   };
 
   useEffect(() => {
-    if (loginUser) {
-      setCartTotal(loginUser.cartItems);
+    if (!loginUserLoading) {
+      if (loginUser) {
+        setCartTotal(loginUser.cartItems);
+      }
+      if (error) {
+        destroyCookie({}, "token");
+        isLoggedInVar(false);
+      }
     }
-  }, [loginUser]);
+  }, [loginUserLoading]);
 
   useEffect(() => {
     const body = document.getElementById("body");

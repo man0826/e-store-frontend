@@ -1,4 +1,4 @@
-import { FieldError, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { useLoginUser, useUpdateUser } from "@/hooks/useUser";
 import { useEffect, useState } from "react";
 import { UpdateUserInput } from "@/graphql/generated.graphql";

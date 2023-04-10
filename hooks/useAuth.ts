@@ -4,12 +4,11 @@ import {
   LoginMutation,
 } from "@/graphql/generated.graphql";
 import { useMutation } from "@apollo/client";
-import { setCookie } from "nookies";
+import { setCookie, destroyCookie } from "nookies";
 import { isLoggedInVar } from "@/utils/cache";
 import { useRouter } from "next/router";
 import { useCallback, useState } from "react";
 import { initializeApollo } from "@/lib/apolloClient";
-import { destroyCookie } from "nookies";
 import { setCartTotal } from "@/utils/setCartTotal";
 
 export const useLogin = () => {

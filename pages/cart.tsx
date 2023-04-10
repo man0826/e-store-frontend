@@ -6,12 +6,16 @@ import { useEffect, useState } from "react";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import { useCheckoutSession } from "@/hooks/usePayment";
+import { useLoginUser } from "@/hooks/useUser";
 import Button from "@/components/ui/Button";
 import CartItem from "@/components/cart/CartItem";
 import { CartItemModel } from "@/graphql/generated.graphql";
+import { destroyCookie } from "nookies";
+import { isLoggedInVar } from "@/utils/cache";
 
 const Cart = () => {
   const { handleSubmit, sessionURL, loading, called } = useCheckoutSession();
+  const { loginUserLoading, error } = useLoginUser();
   const { cartProducts, cartLoading } = useCartItems();
   const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
@@ -29,23 +33,26 @@ const Cart = () => {
     }
   }, [called, loading]);
 
+  useEffect(() => {
+    if (!loginUserLoading) {
+      if (error) {
+        destroyCookie({}, "token");
+        isLoggedInVar(false);
+      }
+    }
+  }, [loginUserLoading]);
+
   return (
     <section className="px-4 py-14 md:py-20">
       <div className="max-w-4xl mx-auto">
-        <h1 className="text-2xl md:text-4xl mb-4 font-futura">CAR</h1>
+        <h1 className="text-2xl md:text-4xl mb-4 font-futura">CART</h1>
         {cartProducts?.length || cartLoading ? (
           <>
             <div className="w-full border-b border-black">
               {cartProducts?.map((cart) => {
                 const { totalAmount } = cart;
                 total += totalAmount;
-                return (
-                  <CartItem
-                    key={cart.id}
-                    // cart={cart}
-                    cart={cart as CartItemModel}
-                  />
-                );
+                return <CartItem key={cart.id} cart={cart as CartItemModel} />;
               })}
             </div>
             <div className="flex justify-between items-center py-5 md:py-6 border-b border-black mb-12">

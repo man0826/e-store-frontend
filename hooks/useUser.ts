@@ -13,12 +13,14 @@ import { useCallback, useState } from "react";
 import { useLogin } from "./useAuth";
 
 export const useLoginUser = () => {
-  const { data } = useQuery<LoginUserQuery>(LoginUserDocument, {
+  const { data, loading, error } = useQuery<LoginUserQuery>(LoginUserDocument, {
     fetchPolicy: "network-only",
   });
 
   return {
     loginUser: data?.loginUser,
+    loginUserLoading: loading,
+    error,
   };
 };
 

@@ -7,6 +7,7 @@ import { useEffect } from "react";
 import { parseCookies } from "nookies";
 import { isLoggedInVar } from "@/utils/cache";
 import useTransition from "@/hooks/useTransition";
+import Head from "next/head";
 
 export default function App({ Component, pageProps }: AppProps) {
   const apolloClient = initializeApollo();
@@ -21,6 +22,10 @@ export default function App({ Component, pageProps }: AppProps) {
 
   return (
     <ApolloProvider client={apolloClient}>
+      <Head>
+        <title>E-STORE</title>
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       <Layout>
         <Component {...pageProps} />
       </Layout>

@@ -2,9 +2,26 @@ import OrderList from "@/components/account/OrderList";
 import Profile from "@/components/account/Profile";
 import { useLogout } from "@/hooks/useAuth";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
+import { useLoginUser } from "@/hooks/useUser";
+import { useEffect } from "react";
+import { useRouter } from "next/router";
+import { destroyCookie } from "nookies";
+import { isLoggedInVar } from "@/utils/cache";
 
 const Account = () => {
   const logout = useLogout();
+  const { loginUserLoading, error } = useLoginUser();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!loginUserLoading) {
+      if (error) {
+        destroyCookie({}, "token");
+        isLoggedInVar(false);
+        router.push("/login");
+      }
+    }
+  }, [loginUserLoading]);
 
   return (
     <section>
